@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.davis.kevin.dijkelapp"
         minSdkVersion 18
-        targetSdkVersion 27
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -31,4 +31,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:design:27.1.1'
+    //implementation 'com.afollestad.material-dialogs:core:2.0.0-rc3'
 }
