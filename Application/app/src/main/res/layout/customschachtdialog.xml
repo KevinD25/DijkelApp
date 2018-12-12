@@ -30,7 +30,7 @@
                 android:inputType="textPersonName"
                 android:hint="Voornaam"
                 android:ems="10"
-                android:id="@+id/editText"
+                android:id="@+id/txtVoornaam"
                 android:textColor="@color/colorAccent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
@@ -42,11 +42,12 @@
                 android:inputType="textPersonName"
                 android:hint="Achternaam"
                 android:ems="10"
-                android:id="@+id/editText2"
+                android:id="@+id/txtAchternaam"
                 android:textColor="@color/colorAccent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="10dp"
+                android:textColorHint="@color/colorAccent"/>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -54,18 +55,17 @@
             <Button
                     android:text="CONFIRM"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/button4" android:layout_weight="1"
+                    android:layout_height="wrap_content" android:id="@+id/btnConfirm" android:layout_weight="1"
                     android:background="@color/colorPrimary"
                     android:textColor="@color/colorAccent"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginRight="10dp"
-            />
+                    android:layout_marginRight="10dp"/>
             <Button
                     android:text="CANCEL"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/button5" android:layout_weight="1"
+                    android:layout_height="wrap_content" android:id="@+id/btnCancel" android:layout_weight="1"
                     android:background="@color/colorPrimary"
                     android:textColor="@color/colorAccent"
                     android:layout_marginTop="10dp"
