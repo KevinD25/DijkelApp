@@ -15,7 +15,7 @@ class SchachtenActivity : AppCompatActivity() {
 
     fun openDialog(view:View){
         MaterialDialog(this).show {
-            customView(R.layout.customdialogview)
+            customView(R.layout.customschachtdialog)
         }
     }
 }

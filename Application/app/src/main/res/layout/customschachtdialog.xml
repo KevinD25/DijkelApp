@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:background="@color/colorPrimaryDark">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TextView
+                android:text="KUTSCHACHT TOEVOEGEN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/textView2"
+                android:textColor="@color/colorAccent"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                android:textSize="8pt"
+                android:textStyle="bold"/>
+        <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/colorAccent"
+                android:layout_marginBottom="15dp"
+        />
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Voornaam"
+                android:ems="10"
+                android:id="@+id/editText"
+                android:textColor="@color/colorAccent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:textColorHint="@color/colorAccent"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Achternaam"
+                android:ems="10"
+                android:id="@+id/editText2"
+                android:textColor="@color/colorAccent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <Button
+                    android:text="CONFIRM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/button4" android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/colorAccent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+            />
+            <Button
+                    android:text="CANCEL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/button5" android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/colorAccent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -29,7 +29,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:borderWidth="2dp"
             android:elevation="2dp"
-            android:focusedByDefault="true" app:fabSize="normal" app:fabCustomSize="75dp"/>
+            android:focusedByDefault="true" app:fabSize="normal" app:fabCustomSize="75dp"
+            android:onClick="openDijkelDialog"/>
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
