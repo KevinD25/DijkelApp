@@ -38,9 +38,10 @@ class SchachtenActivity : AppCompatActivity() {
 
         buttonConfirm.setOnClickListener {
             onClickConfirm(voornaamInput, achternaamInput)
+            dialog.dismiss()
         }
         buttonCancel.setOnClickListener {
-            onClickCancel()
+            dialog.dismiss()
         }
 
     }
@@ -62,17 +63,10 @@ class SchachtenActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Vul alle velden in...", Toast.LENGTH_SHORT).show()
         }
-
     }
 
     fun checkFields(voornaam: String, achternaam: String): Boolean {
         //return !(voornaam.isNullOrEmpty() || achternaam.isNullOrEmpty() || voornaam.isNullOrBlank() || achternaam.isNullOrBlank())
         return voornaam != "" || achternaam != ""
     }
-
-    fun onClickCancel() {
-        //TODO CLOSE DIALOG
-    }
-
-
 }
