@@ -38,6 +38,7 @@ dependencies {
     implementation "com.afollestad.material-dialogs:input:2.0.0-alpha05"
     implementation 'com.google.firebase:firebase-database:16.0.5'
     implementation 'com.google.firebase:firebase-core:16.0.6'
+    implementation 'com.github.mancj:MaterialSearchBar:0.8.1'
 }
 
 

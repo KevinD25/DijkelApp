@@ -3,9 +3,11 @@ package com.davis.kevin.dijkelapp
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
 import com.afollestad.materialdialogs.MaterialDialog
@@ -17,9 +19,13 @@ import com.davis.kevin.dijkelapp.Adapters.SchachtenLijstAdapter
 import com.davis.kevin.dijkelapp.DOM.Dijkel
 import com.davis.kevin.dijkelapp.DOM.Schacht
 import com.google.firebase.database.*
+import com.mancj.materialsearchbar.MaterialSearchBar
 import kotlinx.android.synthetic.main.activity_dijkel.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_schachten.*
+import android.text.Editable
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     private var dijkel: Dijkel? = null
     private var dijkelLijst: MutableList<Dijkel> = mutableListOf()
     private lateinit var dijkelref: DatabaseReference
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +55,13 @@ class MainActivity : AppCompatActivity() {
              item = parent.getItemAtPosition(position) as Schacht
             openDijkelDetail()
         }
+        searchbar()
+        reset()
     }
 
     override fun onResume() {
         fireBaseGet()
+        reset()
         super.onResume()
     }
 
@@ -62,6 +72,8 @@ class MainActivity : AppCompatActivity() {
                 // Get Post object and use the values to update the UI
                 if (dataSnapshot.exists()) {
                     schachtenLijst.clear()
+
+
                     for (h in dataSnapshot.children) {
                         schacht = h.getValue(Schacht::class.java)
                         schachtenLijst.add(schacht!!)
@@ -115,21 +127,30 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun openDijkelDialog(v: View) {
-        val parentRow = v.parent as View
-        val listView = parentRow.parent as ListView
-        val position = listView.getPositionForView(parentRow)
+    fun searchbar(){
+        val searchbar = findViewById(R.id.searchBar) as MaterialSearchBar
 
-        val naam =  schachtenLijst[position].voornaam + " " + schachtenLijst[position].achternaam + " (" + schachtenLijst[position].dijkels + ")"
+        //Searchbar text change listener
+        searchbar.addTextChangeListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
 
+            }
 
-        val dialog = MaterialDialog(this)
-            .customView(R.layout.customdijkeldialog, scrollable = true)
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+                var filteredSchachtenLijst:MutableList<Schacht> = mutableListOf()
+                schachtenLijst.filterTo(filteredSchachtenLijst, {it.getName().contains(charSequence)})
+                val adapter = DijkelLijstAdapter(applicationContext, filteredSchachtenLijst, dijkelLijst)
+                listSchachten.adapter = adapter
+            }
 
-        val customView = dialog.getCustomView()
-        // Use the view instance, e.g. to set values or setup listeners
+            override fun afterTextChanged(editable: Editable) {
+                Log.d("LOG_TAG", javaClass.simpleName + " text changed " + searchBar.text)
+            }
 
+        })
+    }
 
-        dialog.show()
+    fun reset(){
+        searchBar.text = ""
     }
 }

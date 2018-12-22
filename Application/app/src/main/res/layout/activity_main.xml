@@ -39,38 +39,39 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="25pt">
-            <ImageView
-                    android:layout_width="1pt"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@drawable/search"
-                    android:id="@+id/imageView4"
-                    android:layout_weight="1"
-                    android:scaleType="fitCenter"
-                    android:padding="12dp"
-                    android:layout_marginLeft="3dp"
-            />
-            <EditText
-                    android:layout_width="wrap_content"
+                android:layout_height="25pt"
+                android:weightSum="20"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp">
+
+
+            <com.mancj.materialsearchbar.MaterialSearchBar
+                    style="@style/MaterialSearchBarLight"
+                    app:mt_speechMode="false"
+                    app:mt_hint="Search..."
+                    app:mt_maxSuggestionsCount="5"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/colorAccent"
-                    android:ems="10"
-                    android:id="@+id/txtSearch"
-                    android:layout_weight="1"
-                    android:hint="Naam kutschacht"
-                    android:focusedByDefault="false"
-                    android:defaultFocusHighlightEnabled="false"
-                    android:textColorHint="@color/colorAccent"/>
+                    android:id="@+id/searchBar"
+                    android:layout_weight="18"
+                    android:layout_marginLeft="10dp"
+                    app:mt_placeholder="Search..."/>
             <ImageButton
-                    android:layout_width="10pt"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@drawable/settings"
-                    android:id="@+id/btnSettings"
-                    android:layout_weight="1"
-                    android:scaleType="fitCenter"
-                    android:backgroundTint="@color/colorPrimaryDark" android:onClick="goToSettings"/>
+                android:layout_width="10pt"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/settings"
+                android:id="@+id/btnSettings"
+                android:layout_weight="2"
+                android:scaleType="fitCenter"
+                android:backgroundTint="@color/colorPrimaryDark" android:onClick="goToSettings"/>
         </LinearLayout>
+        <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/colorAccent"
+                android:layout_marginBottom="15dp"
+        />
         <ListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:id="@+id/listSchachten"
