@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.ImageButton
+import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
 import com.davis.kevin.dijkelapp.DOM.Dijkel
 import com.davis.kevin.dijkelapp.DOM.Schacht
-import com.davis.kevin.dijkelapp.MainActivity
 import com.davis.kevin.dijkelapp.R
-import org.w3c.dom.Text
+
 
 class DijkelLijstAdapter( private val context: Context,
 private val dataSource: MutableList<Schacht>, private val dijkelLijst: MutableList<Dijkel>

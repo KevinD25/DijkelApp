@@ -4,9 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
@@ -17,6 +15,7 @@ import com.davis.kevin.dijkelapp.DOM.Schacht
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_dijkel.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.dijkeldetailcustom.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,6 +32,7 @@ class DijkelActivity : AppCompatActivity() {
     private var dijkelLijst: MutableList<Dijkel> = mutableListOf()
     private var id: String = ""
     lateinit var customView: View
+    lateinit var checkbox: CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +45,7 @@ class DijkelActivity : AppCompatActivity() {
         fireBaseGet()
         val adapter = DijkeltjesAdapter(applicationContext, dijkelLijst)
         listDijkels.adapter = adapter
+
     }
 
     fun getClickedSchacht() {
@@ -102,6 +103,8 @@ class DijkelActivity : AppCompatActivity() {
 
                     val adapter = DijkeltjesAdapter(applicationContext, dijkelLijst)
                     listDijkels.adapter = adapter
+
+
                 }
             }
 
@@ -130,39 +133,54 @@ class DijkelActivity : AppCompatActivity() {
         val buttonCancel: Button = customView.findViewById(R.id.btnCancel)
 
         buttonConfirm.setOnClickListener {
-            onClickConfirm(aantalDijkels, redenDijkel)
-            dialog.dismiss()
+            onClickConfirm(aantalDijkels, redenDijkel, dialog)
         }
         buttonCancel.setOnClickListener {
             dialog.dismiss()
         }
     }
 
-    fun onClickConfirm(aantalDijkels: EditText, redenDijkel: EditText) {
+    fun onClickConfirm(aantalDijkels: EditText, redenDijkel: EditText, dialog:MaterialDialog) {
+
+        if (aantalDijkels.text.toString().trim() != "") {
+            if (checkFields(aantalDijkels, redenDijkel)) {
+
+                val myRef = database.getReference("dijkels")
+                var aantal: Int = aantalDijkels.text.toString().trim().toInt()
+                var reden: String = redenDijkel.text.toString().trim()
+                for (i in 1..aantal) {
+                    val dijkelId = myRef.push().key.toString()
+                    val sdf = SimpleDateFormat("dd/M/yyyy")
+                    val currentDate = sdf.format(Date())
+                    val dijkel =
+                        Dijkel(dijkelId, item.id, reden, "TEMPORARY USER", false, currentDate)//TODO ACTIVE USER
+                    myRef.child(dijkelId).setValue(dijkel).addOnCompleteListener {}
+                }
+                dialog.dismiss()
+
+            } else {
+                if(aantalDijkels.text.toString().trim() == "") aantalDijkels.setError("Empty field!")
+                if(redenDijkel.text.toString().trim() == "") redenDijkel.setError("Empty field!")
+            }
+        }
+
+    }
+
+    fun checkFields(aantalDijkels: EditText, redenDijkel: EditText): Boolean {
+        //return !(voornaam.isNullOrEmpty() || achternaam.isNullOrEmpty() || voornaam.isNullOrBlank() || achternaam.isNullOrBlank())
         var aantal: Int = aantalDijkels.text.toString().trim().toInt()
         var reden: String = redenDijkel.text.toString().trim()
-
-        if (checkFields(aantal, reden)) {
-
-            val myRef = database.getReference("dijkels")
-
-            for(i in 1 .. aantal){
-                val dijkelId = myRef.push().key.toString()
-                val sdf = SimpleDateFormat("dd/M/yyyy")
-                val currentDate = sdf.format(Date())
-                val dijkel = Dijkel(dijkelId, item.id, reden, "TEMPORARY USER", false, currentDate)//TODO ACTIVE USER
-                myRef.child(dijkelId).setValue(dijkel).addOnCompleteListener {}
-            }
-
-        } else {
-            Toast.makeText(this, "Vul alle velden in...", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    fun checkFields(aantal: Int, reden: String): Boolean {
-        //return !(voornaam.isNullOrEmpty() || achternaam.isNullOrEmpty() || voornaam.isNullOrBlank() || achternaam.isNullOrBlank())
         return aantal > 0 && reden != ""
     }
+
+    /*fun onCheckedDone() {
+
+        if (checkbox.isChecked) {
+            imgApproved.visibility = View.VISIBLE
+        } else {
+            imgApproved.visibility = View.INVISIBLE
+        }
+    }*/
 
 
 }

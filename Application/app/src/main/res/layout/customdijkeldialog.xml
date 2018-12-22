@@ -34,7 +34,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
-                android:hint="# Dijkeltjes"
+                android:hint="Aantal dijkeltjes"
                 android:textColorHint="@color/colorAccent"/>
         <EditText
                 android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                 android:maxEms="5"
                 android:hint="Reden"
                 android:textColorHint="@color/colorAccent"
-                android:maxLength="250"/>
+                android:maxLength="128"/>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"

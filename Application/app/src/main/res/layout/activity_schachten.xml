@@ -24,7 +24,7 @@ android:background="@color/colorPrimaryDark">
             app:layout_constraintStart_toStartOf="parent"
             app:borderWidth="2dp"
             android:elevation="2dp"
-            app:maxImageSize="50dp" app:layout_constraintHorizontal_bias="0.501" app:fabSize="mini"
+            app:maxImageSize="50dp" app:layout_constraintHorizontal_bias="0.948" app:fabSize="mini"
             app:fabCustomSize="75dp" android:onClick="openDialog"/>
 
     <LinearLayout

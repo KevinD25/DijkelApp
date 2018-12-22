@@ -31,6 +31,14 @@
             android:elevation="2dp"
             android:focusedByDefault="true" app:fabSize="normal" app:fabCustomSize="75dp"
             android:onClick="onClickAdd"/>-->
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" app:srcCompat="@drawable/technicaschild" android:id="@+id/imageView3"
+            android:scaleType="fitCenter"
+            android:padding="80dp"
+            android:layout_marginTop="80dp"
+            android:alpha="0.1"
+    />
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
