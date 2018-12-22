@@ -47,6 +47,7 @@ class SchachtenActivity : AppCompatActivity() {
                     schachtenLijst.clear()
                 }*/
                 if (dataSnapshot.exists()) {
+                    schachtenLijst.clear()
                     for (h in dataSnapshot.children) {
                         schacht = h.getValue(Schacht::class.java)
                         schachtenLijst.add(schacht!!)
@@ -69,7 +70,6 @@ class SchachtenActivity : AppCompatActivity() {
     fun openDialog(view: View) {
         val dialog = MaterialDialog(this).show {
             customView(R.layout.customschachtdialog)
-
         }
 
         // Setup custom view content
@@ -110,6 +110,6 @@ class SchachtenActivity : AppCompatActivity() {
 
     fun checkFields(voornaam: String, achternaam: String): Boolean {
         //return !(voornaam.isNullOrEmpty() || achternaam.isNullOrEmpty() || voornaam.isNullOrBlank() || achternaam.isNullOrBlank())
-        return voornaam != "" || achternaam != ""
+        return voornaam != "" && achternaam != ""
     }
 }

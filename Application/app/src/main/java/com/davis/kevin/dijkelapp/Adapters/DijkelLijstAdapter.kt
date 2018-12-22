@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageButton
 import android.widget.TextView
+import com.davis.kevin.dijkelapp.DOM.Dijkel
 import com.davis.kevin.dijkelapp.DOM.Schacht
+import com.davis.kevin.dijkelapp.MainActivity
 import com.davis.kevin.dijkelapp.R
 import org.w3c.dom.Text
 
 class DijkelLijstAdapter( private val context: Context,
-private val dataSource: MutableList<Schacht>
+private val dataSource: MutableList<Schacht>, private val dijkelLijst: MutableList<Dijkel>
 ) : BaseAdapter() {
 
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -22,7 +25,16 @@ private val dataSource: MutableList<Schacht>
         val Schachttextview = rowView.findViewById(R.id.txtSchacht) as TextView
         val Dijkeltextview = rowView.findViewById(R.id.txtDijkels) as TextView
         Schachttextview.text = dataSource[position].voornaam + " " + dataSource[position].achternaam
-        Dijkeltextview.text = dataSource[position].dijkels.toString()
+
+
+        var aantalDijkels : Int = 0
+        for(item in dijkelLijst){
+            if(dataSource[position].id == item.schachtid){
+                aantalDijkels++
+            }
+        }
+
+        Dijkeltextview.text = aantalDijkels.toString()
 
         return rowView
     }

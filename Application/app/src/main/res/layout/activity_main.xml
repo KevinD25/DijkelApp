@@ -8,7 +8,7 @@
         tools:context=".MainActivity"
         android:background="@color/colorPrimaryDark">
 
-    <android.support.design.widget.FloatingActionButton
+    <!--<android.support.design.widget.FloatingActionButton
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:clickable="true"
@@ -30,7 +30,7 @@
             app:borderWidth="2dp"
             android:elevation="2dp"
             android:focusedByDefault="true" app:fabSize="normal" app:fabCustomSize="75dp"
-            android:onClick="openDijkelDialog"/>
+            android:onClick="onClickAdd"/>-->
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"

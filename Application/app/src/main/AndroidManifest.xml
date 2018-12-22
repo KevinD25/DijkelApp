@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.davis.kevin.dijkelapp">
 
     <application
@@ -10,7 +11,6 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-
         </activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -22,7 +22,8 @@
         <activity android:name=".SettingsActivity">
         </activity>
         <activity android:name=".SchachtenActivity">
-
+        </activity>
+        <activity android:name=".DijkelActivity">
         </activity>
     </application>
 
