@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:background="@color/colorPrimaryDark">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TextView
+                android:text="Alle schachten verwijderen?"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/textView2"
+                android:textColor="@color/colorAccent"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                android:textSize="8pt"
+                android:textStyle="bold"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <Button
+                    android:text="DELETE ALL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/btnDeleteAll" android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/colorAccent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"/>
+            <Button
+                    android:text="CANCEL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/btnCancel" android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/colorAccent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

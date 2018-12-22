@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".DijkelActivity">
         </activity>
+        <activity android:name=".SchachtDetailActivity">
+        </activity>
     </application>
 
 </manifest>

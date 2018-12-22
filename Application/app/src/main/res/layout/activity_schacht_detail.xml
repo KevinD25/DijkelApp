@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SchachtDetailActivity"
+        android:background="@color/colorPrimaryDark">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark">
+        <TextView
+                android:text="SCHACHTEN"
+                android:textColor="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="25pt"
+                android:id="@+id/txtEditSchachtNaam"
+                android:textSize="15pt"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"/>
+        <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/colorAccent"
+                android:layout_marginBottom="15dp"
+        />
+        <EditText
+                android:id="@+id/editVoornaam"
+                android:layout_width="320dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:inputType="textPersonName"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/colorAccent"/>
+        <EditText
+                android:id="@+id/editAchternaam"
+                android:layout_width="320dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="4dp"
+                android:ems="10"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:inputType="textPersonName"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:textColor="@color/colorAccent"/>
+
+        <Button
+                android:text="EDIT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/btnEdit"
+                android:background="@color/colorPrimary"
+                android:layout_gravity="center"
+                android:textColor="@color/colorAccent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="30dp" android:onClick="onClickEdit"/>
+        <Button
+                android:text="DELETE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/btnDelete"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/colorAccent"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="30dp" android:onClick="onClickDelete"/>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

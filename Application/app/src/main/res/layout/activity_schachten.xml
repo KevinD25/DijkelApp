@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".SchachtenActivity"
-android:background="@color/colorPrimaryDark">
+        android:background="@color/colorPrimaryDark">
 
     <android.support.design.widget.FloatingActionButton
             android:layout_width="75dp"
@@ -27,27 +27,47 @@ android:background="@color/colorPrimaryDark">
             app:maxImageSize="50dp" app:layout_constraintHorizontal_bias="0.948" app:fabSize="mini"
             app:fabCustomSize="75dp" android:onClick="openDialog"/>
 
+    <android.support.design.widget.FloatingActionButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:clickable="true"
+            android:src="@drawable/minus"
+            android:scaleType="fitXY"
+            android:foregroundGravity="center"
+            android:id="@+id/btnDelete"
+            android:backgroundTint="@color/colorPrimaryDark"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.808"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:borderWidth="2dp"
+            android:elevation="2dp"
+            app:maxImageSize="20dp" app:layout_constraintHorizontal_bias="0.904" app:fabSize="mini"
+            app:fabCustomSize="40dp"
+            android:onClick="openDeleteDialog"/>
+
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimaryDark">
-    <TextView
-            android:text="SCHACHTEN"
-            android:textColor="@color/colorAccent"
-            android:layout_width="match_parent"
-            android:layout_height="25pt" android:id="@+id/textView"
-            android:textSize="15pt"
-            android:gravity="center"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="5dp"/>
-    <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@color/colorAccent"
-            android:layout_marginBottom="15dp"
-    />
+        <TextView
+                android:text="SCHACHTEN"
+                android:textColor="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="25pt" android:id="@+id/textView"
+                android:textSize="15pt"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"/>
+        <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/colorAccent"
+                android:layout_marginBottom="15dp"
+        />
         <ListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:id="@+id/listSchachtenAdmin"/>
