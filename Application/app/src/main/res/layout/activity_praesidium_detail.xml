@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             android:background="@color/colorPrimaryDark">
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".PraesidiumDetailActivity"
+        android:background="@color/colorPrimaryDark">
 
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <TextView
-                android:text="USER TOEVOEGEN"
+                android:text="USER AANPASSEN"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/textView2"
                 android:textColor="@color/colorAccent"
@@ -48,30 +52,6 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
                 android:textColorHint="@color/colorAccent"/>
-        <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="Wachtwoord"
-                android:ems="10"
-                android:id="@+id/txtpassword"
-                android:textColor="@color/colorAccent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:textColorHint="@color/colorAccent"/>
-        <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="Herhaal wachtwoord"
-                android:ems="10"
-                android:id="@+id/txtpassword2"
-                android:textColor="@color/colorAccent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:textColorHint="@color/colorAccent"/>
 
         <TextView
                 android:text="Rol:"
@@ -94,30 +74,28 @@
                 android:layout_marginBottom="10dp"
                 android:textColorHint="@color/colorAccent"
                 android:dropDownWidth="match_parent"/>
-        <LinearLayout
-                android:orientation="horizontal"
+        <Button
+                android:text="EDIT"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <Button
-                    android:text="CONFIRM"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/btnConfirm" android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:textColor="@color/colorAccent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="10dp"/>
-            <Button
-                    android:text="CANCEL"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/btnCancel" android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:textColor="@color/colorAccent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="10dp"/>
-        </LinearLayout>
+                android:layout_height="wrap_content" android:id="@+id/btnEdit2"
+                android:background="@color/colorPrimary"
+                android:layout_gravity="center"
+                android:textColor="@color/colorAccent"
+                android:onClick="onClickEdit"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                />
+        <Button
+                android:text="DELETE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/btnDelete2"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/colorAccent"
+                android:layout_gravity="center"
+                android:onClick="onClickDelete"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -106,9 +106,6 @@ class SchachtDetailActivity : AppCompatActivity() {
                         dijkel = h.getValue(Dijkel::class.java)
                         dijkelLijst.add(dijkel!!)
                     }
-
-                    val adapter = DijkeltjesAdapter(applicationContext, dijkelLijst)
-                    listDijkels.adapter = adapter
                 }
             }
 

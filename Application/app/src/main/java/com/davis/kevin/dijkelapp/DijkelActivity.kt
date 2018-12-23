@@ -11,6 +11,7 @@ import com.afollestad.materialdialogs.customview.getCustomView
 import com.davis.kevin.dijkelapp.Adapters.DijkelLijstAdapter
 import com.davis.kevin.dijkelapp.Adapters.DijkeltjesAdapter
 import com.davis.kevin.dijkelapp.DOM.Dijkel
+import com.davis.kevin.dijkelapp.DOM.MyApplication.Companion.currentUser
 import com.davis.kevin.dijkelapp.DOM.Schacht
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_dijkel.*
@@ -148,12 +149,13 @@ class DijkelActivity : AppCompatActivity() {
                 val myRef = database.getReference("dijkels")
                 var aantal: Int = aantalDijkels.text.toString().trim().toInt()
                 var reden: String = redenDijkel.text.toString().trim()
+                val donor : String = currentUser.username
                 for (i in 1..aantal) {
                     val dijkelId = myRef.push().key.toString()
                     val sdf = SimpleDateFormat("dd/M/yyyy")
                     val currentDate = sdf.format(Date())
                     val dijkel =
-                        Dijkel(dijkelId, item.id, reden, "TEMPORARY USER", false, currentDate)//TODO ACTIVE USER
+                        Dijkel(dijkelId, item.id, reden, donor, false, currentDate)
                     myRef.child(dijkelId).setValue(dijkel).addOnCompleteListener {}
                 }
                 dialog.dismiss()

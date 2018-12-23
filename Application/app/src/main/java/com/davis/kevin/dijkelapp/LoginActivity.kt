@@ -51,16 +51,22 @@ class LoginActivity : AppCompatActivity() {
                 }
             } else {
                 if (username.equals(""))
-                    editUsername.setError("email is blank!")
+                    editUsername.setError("username is blank!")
                 if (password.equals(""))
                     editPassword.setError("password is blank!")
             }
         }
     }
 
+    override fun onStart() {
+        checkIfLoggedIn()
+        super.onStart()
+    }
+
     private fun checkIfLoggedIn() {
         if (currentUser.id != "") {
-
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -72,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
     fun checkCredentials(username: String, password: String): Boolean {
         var match: Boolean = false
         for (item in userLijst) {
-            if (item.username == username && item.password == password) {
+            if (item.username.toLowerCase() == username.toLowerCase() && item.password == password) {
                 activeuser = item
                 match = true
             }
