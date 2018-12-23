@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".PraesidiumActivity"
+        android:background="@color/colorPrimaryDark">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark">
+        <TextView
+                android:text="PRAESIDIUM"
+                android:textColor="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="25pt" android:id="@+id/textView"
+                android:textSize="15pt"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"/>
+        <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/colorAccent"
+                android:layout_marginBottom="15dp"
+        />
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/listPraesidiumAdmin"/>
+    </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:clickable="true"
+            app:srcCompat="@drawable/add"
+            android:scaleType="fitXY"
+            android:foregroundGravity="center"
+            android:id="@+id/btnAdd"
+            android:backgroundTint="@color/colorPrimaryDark"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.967"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:borderWidth="2dp"
+            android:elevation="2dp"
+            app:maxImageSize="50dp" app:layout_constraintHorizontal_bias="0.948" app:fabSize="mini"
+            app:fabCustomSize="75dp" android:onClick="openDialog"/>
+</android.support.constraint.ConstraintLayout>

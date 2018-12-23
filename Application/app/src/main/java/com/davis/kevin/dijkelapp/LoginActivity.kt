@@ -1,111 +1,96 @@
 package com.davis.kevin.dijkelapp
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.View
-import android.widget.Toast
-import com.davis.kevin.dijkelapp.Adapters.DijkelLijstAdapter
-import com.davis.kevin.dijkelapp.DOM.Dijkel
-import com.davis.kevin.dijkelapp.DOM.Schacht
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
+import com.davis.kevin.dijkelapp.Adapters.UserLijstAdapter
+import com.davis.kevin.dijkelapp.DOM.Hashing
+import com.davis.kevin.dijkelapp.DOM.MyApplication.Companion.currentUser
+import com.davis.kevin.dijkelapp.DOM.User
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_praesidium.*
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
+    lateinit var database: FirebaseDatabase
+    private lateinit var reference: DatabaseReference
+    private var user: User? = null
+    private var userLijst: MutableList<User> = mutableListOf()
+    private lateinit var activeuser: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        checkIfLoggedIn()
 
-        // Initialize Firebase Auth
-        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+        reference = FirebaseDatabase.getInstance().getReference("users")
+        fireBaseGet()
 
 
         txtSignIn.setOnClickListener {
 
             //DEVELOPMENT STAGE
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            //val intent = Intent(this, MainActivity::class.java)
+            //startActivity(intent)
             //DELETE UPPER TO ENABLE SIGN-IN
 
-
-            val username : String = editUsername.text.toString()
-            val password : String = editPassword.text.toString()
+            val hash = Hashing()
+            val username: String = editUsername.text.toString().trim()
+            var password: String = editPassword.text.toString().trim()
             if (!username.equals("") && !password.equals("")) {
-                if (android.util.Patterns.EMAIL_ADDRESS.matcher(username).matches())
+                password = hash.hashPassword(password)
+                if (checkCredentials(username, password))
                     SignIn(username, password)
-                else
-                    editUsername.setError("Please use a valid email address")
-            }
-            else{
-                if(username.equals(""))
+                else {
+                    editUsername.error = "Invalid credentials"
+                    editPassword.error = "Invalid credentials"
+                }
+            } else {
+                if (username.equals(""))
                     editUsername.setError("email is blank!")
-                if(password.equals(""))
+                if (password.equals(""))
                     editPassword.setError("password is blank!")
             }
         }
     }
 
-    fun SignIn(email : String, password : String){
+    private fun checkIfLoggedIn() {
+        if (currentUser.id != "") {
 
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d("TAG", "signInWithEmail:success")
-                    val user = auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w("TAG", "signInWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                    updateUI(null)
-                }
-
-                // ...
-            }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        updateUI(currentUser)
-    }
-
-    fun updateUI(currentUser : FirebaseUser?){
-        if(currentUser != null){
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
         }
     }
 
+    override fun onBackPressed() {
+        moveTaskToBack(true)
+        super.onBackPressed()
+    }
 
-   /* fun fireBaseGet() {
-        val schachtListener = object : ValueEventListener {
+    fun checkCredentials(username: String, password: String): Boolean {
+        var match: Boolean = false
+        for (item in userLijst) {
+            if (item.username == username && item.password == password) {
+                activeuser = item
+                match = true
+            }
+        }
+        return match
+    }
+
+    fun fireBaseGet() {
+        val userListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
                 // Get Post object and use the values to update the UI
+
                 if (dataSnapshot.exists()) {
-                    schachtenLijst.clear()
-
-
+                    userLijst.clear()
                     for (h in dataSnapshot.children) {
-                        schacht = h.getValue(Schacht::class.java)
-                        schachtenLijst.add(schacht!!)
+                        user = h.getValue(User::class.java)
+                        userLijst.add(user!!)
                     }
-                    val adapter = DijkelLijstAdapter(applicationContext, schachtenLijst, dijkelLijst)
-                    listSchachten.adapter = adapter
                 }
             }
 
@@ -115,9 +100,12 @@ class LoginActivity : AppCompatActivity() {
                 // ...
             }
         }
-        reference.addValueEventListener(schachtListener)
+        reference.addValueEventListener(userListener)
+    }
 
-
-    }*/
-
+    fun SignIn(email: String, password: String) {
+        currentUser = activeuser
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
 }

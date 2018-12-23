@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">DijkelApp</string>
     <string name="confirm">CONFIRM</string>
+    <string-array name="roles">
+        <item>Praeses</item>
+        <item>Vice-Praeses</item>
+        <item>Schachtenmeester</item>
+        <item>Schachtentemmer</item>
+        <item>Lid</item>
+    </string-array>
 </resources>

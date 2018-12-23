@@ -4,6 +4,7 @@
           package="com.davis.kevin.dijkelapp">
 
     <application
+            android:name=".DOM.MyApplication"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
@@ -26,6 +27,8 @@
         <activity android:name=".DijkelActivity">
         </activity>
         <activity android:name=".SchachtDetailActivity">
+        </activity>
+        <activity android:name=".PraesidiumActivity">
         </activity>
     </application>
 

@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_dijkel.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_schachten.*
 import android.text.Editable
+import com.davis.kevin.dijkelapp.DOM.MyApplication.Companion.currentUser
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -72,6 +73,13 @@ class MainActivity : AppCompatActivity() {
             // FirebaseUser.getToken() instead.
             val uid = user.uid
         }
+    }
+
+    override fun onBackPressed() {
+        if(currentUser.id != ""){
+            moveTaskToBack(true)
+        }
+        super.onBackPressed()
     }
 
     override fun onResume() {
