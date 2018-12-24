@@ -99,10 +99,11 @@ class PraesidiumDetailActivity : AppCompatActivity() {
         val voornaam = splitsen[0]
         var achternaam: String = ""
         for (i in 1..splitsen.size - 1) {
-            achternaam = splitsen[i] + " "
+            achternaam = achternaam + splitsen[i] + " "
         }
         achternaam = achternaam.trim()
 
+        txtPraesidium.setText(voornaam + " " + achternaam)
         txtVoornaam.setText(voornaam)
         txtAchternaam.setText(achternaam)
         fillSpinner()

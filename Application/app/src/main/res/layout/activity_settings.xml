@@ -38,7 +38,7 @@
                 android:textStyle="bold"
                 android:textSize="8pt" android:onClick="goToPasswordChange"/>
         <Button
-                android:text="BELANGRIJKE MENSEN"
+                android:text="PRAESIDIUM"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/btnUsers"
                 android:textColor="@color/colorAccent"

@@ -30,7 +30,10 @@ private val dataSource: MutableList<Schacht>, private val dijkelLijst: MutableLi
         var aantalDijkels : Int = 0
         for(item in dijkelLijst){
             if(dataSource[position].id == item.schachtid){
-                aantalDijkels++
+                if(!item.done){
+                    aantalDijkels++
+                }
+
             }
         }
 

@@ -15,12 +15,13 @@
         <TextView
                 android:text="USER AANPASSEN"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/textView2"
+                android:layout_height="25pt" android:id="@+id/txtPraesidium"
                 android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:textSize="15pt"
                 android:gravity="center"
                 android:layout_marginBottom="10dp"
-                android:textSize="8pt"
-                android:textStyle="bold"/>
+                android:layout_marginTop="5dp"/>
         <View
                 android:id="@+id/divider"
                 android:layout_width="match_parent"

@@ -8,55 +8,85 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="100dp"
             android:weightSum="20"
             android:background="@color/colorPrimaryDark">
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="4"
+                android:layout_weight="7"
                 android:weightSum="10"
                 android:layout_marginTop="10dp">
-            <TextView
-                    android:text="DATUM"
+            <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" android:id="@+id/txtDatum"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_weight="5"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="8dp"/>
-            <TextView
-                    android:text="GEGEVEN DOOR"
+                    android:layout_height="match_parent" android:layout_weight="5"
+                    android:weightSum="10">
+                <TextView
+                        android:text="DATUM"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" android:id="@+id/txtDatum"
+                        android:layout_gravity="center"
+                        android:gravity="center|left"
+                        android:layout_weight="5"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="12dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginBottom="5dp"/>
+                <TextView
+                        android:text="GEGEVEN DOOR"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" android:id="@+id/txtDonor" android:layout_weight="5"
+                        android:layout_gravity="center"
+                        android:gravity="center|left"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="12dp"
+                />
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" android:id="@+id/txtDonor" android:layout_weight="5"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="8dp"/>
+                    android:layout_height="wrap_content" android:layout_weight="5"
+                    android:weightSum="10">
+                <CheckBox
+                        android:text="Done"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" android:id="@+id/chbDone"
+                        android:textDirection="rtl"
+                        android:textColor="@color/colorAccent"
+                        android:outlineAmbientShadowColor="@color/colorAccent"
+                        android:outlineSpotShadowColor="@color/colorAccent"
+                        android:onClick="onCheckedDone"
+                        android:layout_weight="5"
+                        android:layout_marginRight="5dp"
+                        android:button="@null"
+                        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                        android:textSize="12dp"/>
+                <TextView
+                        android:text="Checked op"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" android:id="@+id/txtDatumChecked" android:layout_weight="5"
+                        android:gravity="right"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorAccent"
+                        android:layout_marginRight="25dp"
+                        android:textSize="12dp"
+                        android:visibility="invisible"
+                />
+            </LinearLayout>
         </LinearLayout>
+
         <TextView
                 android:text="REDEN"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp" android:id="@+id/txtReden" android:layout_weight="12"
+                android:layout_height="0dp" android:id="@+id/txtReden" android:layout_weight="13"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="16dp"
 
         />
-        <CheckBox
-                android:text="Done"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp" android:id="@+id/chbDone" android:layout_weight="4"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="@color/colorAccent"
-                android:outlineAmbientShadowColor="@color/colorAccent"
-                android:outlineSpotShadowColor="@color/colorAccent"
-                android:layout_marginBottom="10dp"
-                android:onClick="onCheckedDone"/>
     </LinearLayout>
     <ImageView
             android:layout_width="wrap_content"

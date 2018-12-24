@@ -30,7 +30,7 @@ class SettingsActivity : AppCompatActivity() {
         val klrDisabled : Int = Color.GRAY
         val klrEnabled : Int = Color.WHITE
         when (currentUser.role) {
-            "god" -> updateButtons(true, true,  klrEnabled, klrEnabled)
+            "God" -> updateButtons(true, true,  klrEnabled, klrEnabled)
             "Praeses" -> updateButtons(true, true,  klrEnabled, klrEnabled)
             "Vice-Praeses" -> updateButtons(true, true,  klrEnabled, klrEnabled)
             "Schachtenmeester" -> updateButtons(false, true,  klrDisabled, klrEnabled)

@@ -49,6 +49,8 @@ class DijkelActivity : AppCompatActivity() {
 
     }
 
+
+
     fun getClickedSchacht() {
         for (schacht in schachtenLijst) {
             if (schacht.id == id) {
@@ -173,6 +175,10 @@ class DijkelActivity : AppCompatActivity() {
         var aantal: Int = aantalDijkels.text.toString().trim().toInt()
         var reden: String = redenDijkel.text.toString().trim()
         return aantal > 0 && reden != ""
+    }
+
+    fun onCheckedDone(){
+
     }
 
     /*fun onCheckedDone() {

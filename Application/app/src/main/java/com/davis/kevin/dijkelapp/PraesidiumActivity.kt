@@ -30,6 +30,7 @@ class PraesidiumActivity : AppCompatActivity() {
     private var userLijst: MutableList<User> = mutableListOf()
     private var tempUserLijst: MutableList<User> = mutableListOf()
     lateinit var item: User
+    var duplicate = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +69,7 @@ class PraesidiumActivity : AppCompatActivity() {
 
             private fun filterLijst(userLijst: MutableList<User>) {
                 tempUserLijst.clear()
-                for(loop in userLijst){
+                for (loop in userLijst) {
                     tempUserLijst.add(loop)
                 }
                 for (loop in userLijst) {
@@ -79,10 +80,16 @@ class PraesidiumActivity : AppCompatActivity() {
                         "Vice-Praeses" -> if (loop.role.equals("God") || loop.role.equals("Praeses")) {
                             tempUserLijst.remove(loop)
                         }
-                        "Schachtenmeester" -> if (loop.role.equals("God") || loop.role.equals("Praeses") || loop.role.equals("Vice-Praeses")) {
+                        "Schachtenmeester" -> if (loop.role.equals("God") || loop.role.equals("Praeses") || loop.role.equals(
+                                "Vice-Praeses"
+                            )
+                        ) {
                             tempUserLijst.remove(loop)
                         }
-                        "Schachtentemmer" -> if (loop.role.equals("God") || loop.role.equals("Praeses") || loop.role.equals("Vice-Praeses") || loop.role.equals("Schachtenmeester")) {
+                        "Schachtentemmer" -> if (loop.role.equals("God") || loop.role.equals("Praeses") || loop.role.equals(
+                                "Vice-Praeses"
+                            ) || loop.role.equals("Schachtenmeester")
+                        ) {
                             tempUserLijst.remove(loop)
                         }
                         "Lid" -> if (loop.role.equals("God") || loop.role.equals("Praeses") || loop.role.equals("Vice-Praeses") || loop.role.equals(
@@ -94,7 +101,7 @@ class PraesidiumActivity : AppCompatActivity() {
                     }
                 }
                 userLijst.clear()
-                for(loop in tempUserLijst){
+                for (loop in tempUserLijst) {
                     userLijst.add(loop)
                 }
             }
@@ -157,7 +164,9 @@ class PraesidiumActivity : AppCompatActivity() {
 
         buttonConfirm.setOnClickListener {
             onClickConfirm(voornaamInput, achternaamInput, wachtwoordInput, wachtwoord2Input, rolInput)
-            dialog.dismiss()
+            if(!duplicate){
+                dialog.dismiss()
+            }
         }
         buttonCancel.setOnClickListener {
             dialog.dismiss()
@@ -178,22 +187,37 @@ class PraesidiumActivity : AppCompatActivity() {
         var ww2: String = wachtwoord2Input.text.toString().trim()
         var rol: String = rolInput.selectedItem.toString()
         if (checkFields(vn, an, ww, ww2)) {
-
-            val myRef = database.getReference("users")
-            val praesidiumId = myRef.push().key.toString()
             var username = vn + " " + an
             username = username.replace(" ", ".")
-            val hash = Hashing()
-            ww = hash.hashPassword(ww)
-            val user = User(praesidiumId, username, rol, ww)
-            myRef.child(praesidiumId).setValue(user).addOnCompleteListener {
-                //TODO CLOSE DIALOG
+            if (!checkDuplicate(username, voornaamInput, achternaamInput)) {
+                val myRef = database.getReference("users")
+                val praesidiumId = myRef.push().key.toString()
+                val hash = Hashing()
+                ww = hash.hashPassword(ww)
+                val user = User(praesidiumId, username, rol, ww)
+                myRef.child(praesidiumId).setValue(user).addOnCompleteListener {
+                    //TODO CLOSE DIALOG
+                }
             }
-
-
         } else {
             Toast.makeText(this, "Vul alle velden in...", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun checkDuplicate(
+        username: String, voornaamInput: EditText,
+        achternaamInput: EditText
+    ): Boolean {
+        duplicate = false
+        for (existinguser in userLijst) {
+
+            if (existinguser.username.equals(username)) {
+                duplicate = true
+                voornaamInput.error = "User bestaat al..."
+                achternaamInput.error = "User bestaat al..."
+            }
+        }
+        return duplicate
     }
 
     fun checkFields(voornaam: String, achternaam: String, ww: String, ww2: String): Boolean {

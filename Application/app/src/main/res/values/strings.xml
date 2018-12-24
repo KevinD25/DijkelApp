@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DijkelApp</string>
+    <string name="app_name">Dijkel</string>
     <string name="confirm">CONFIRM</string>
     <string-array name="roles">
         <item>Praeses</item>
