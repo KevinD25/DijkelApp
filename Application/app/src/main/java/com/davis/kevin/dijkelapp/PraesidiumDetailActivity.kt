@@ -38,8 +38,8 @@ class PraesidiumDetailActivity : AppCompatActivity() {
     }
 
     fun onClickEdit(view: View) {
-        val voornaam = editVoornaam.text.toString().trim()
-        val achternaam = editAchternaam.text.toString().trim()
+        val voornaam = txtVoornaam.text.toString().trim()
+        val achternaam = txtAchternaam.text.toString().trim()
         var rol: String = spnRol.selectedItem.toString()
         var username = voornaam + " " + achternaam
         username = username.replace(" ", ".")
@@ -48,7 +48,7 @@ class PraesidiumDetailActivity : AppCompatActivity() {
         if (achternaam.isEmpty()) editAchternaam.error = "Empty field"
 
         if (voornaam.isNotEmpty() && achternaam.isNotEmpty()) {
-            val user = User(item.id, username, item.password, rol)
+            val user = User(item.id, username, rol , item.password)
             reference.child(item.id).setValue(user)
             super.onBackPressed()
         }

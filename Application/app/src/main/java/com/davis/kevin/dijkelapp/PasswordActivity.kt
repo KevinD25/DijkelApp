@@ -45,7 +45,8 @@ class PasswordActivity : AppCompatActivity() {
 
         if (currentUser.password.equals(checkWW)) {
             if (newPw.equals(newPw2)) {
-                val user = User(currentUser.id, currentUser.username, currentUser.role, checkWW)
+                val changePass = hash.hashPassword(newPw)
+                val user = User(currentUser.id, currentUser.username, currentUser.role, changePass)
                 Toast.makeText(this, "Password changed...", Toast.LENGTH_SHORT).show()
                 reference.child(currentUser.id).setValue(user)
                 super.onBackPressed()
