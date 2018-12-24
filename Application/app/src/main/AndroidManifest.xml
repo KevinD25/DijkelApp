@@ -14,11 +14,6 @@
         <activity android:name=".MainActivity">
         </activity>
         <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".SettingsActivity">
         </activity>
@@ -33,6 +28,16 @@
         <activity android:name=".PraesidiumDetailActivity">
         </activity>
         <activity android:name=".PasswordActivity">
+        </activity>
+        <activity android:name=".SplashScreenActivity">
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:theme="@style/FullscreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
