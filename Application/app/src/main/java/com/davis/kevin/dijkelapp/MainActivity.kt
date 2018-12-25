@@ -29,7 +29,13 @@ class MainActivity : AppCompatActivity() {
     private var dijkelLijst: MutableList<Dijkel> = mutableListOf()
     private lateinit var dijkelref: DatabaseReference
 
-    private lateinit var mediaPlayer : MediaPlayer
+
+    //songs
+    private lateinit var gravensteen : MediaPlayer
+    private lateinit var blauwvoet : MediaPlayer
+    private lateinit var zeeroverslied : MediaPlayer
+    private lateinit var stormopzee : MediaPlayer
+    private lateinit var countryroads : MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +45,11 @@ class MainActivity : AppCompatActivity() {
         reference = FirebaseDatabase.getInstance().getReference("schachten")
         dijkelref = FirebaseDatabase.getInstance().getReference("dijkels")
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.gravensteen)
+        gravensteen = MediaPlayer.create(this, R.raw.gravensteen)
+        blauwvoet = MediaPlayer.create(this, R.raw.blauwvoet)
+        zeeroverslied = MediaPlayer.create(this, R.raw.zeeroverslied)
+        stormopzee = MediaPlayer.create(this, R.raw.stormopzee)
+        countryroads = MediaPlayer.create(this, R.raw.countryroads)
 
         fireBaseGet()
 
@@ -158,41 +168,40 @@ class MainActivity : AppCompatActivity() {
 
                 when(song){
                     "gravensteen" -> {
-                        mediaPlayer = MediaPlayer.create(me, R.raw.gravensteen)
-                        mediaPlayer.start()
-                        mediaPlayer.isLooping = true
+                        startSong(gravensteen)
                     }
                     "blauwvoet" -> {
-                        mediaPlayer = MediaPlayer.create(me, R.raw.blauwvoet)
-                        mediaPlayer.start()
-                        mediaPlayer.isLooping = true
+                        startSong(blauwvoet)
                     }
                     "zeeroverslied" -> {
-                        mediaPlayer = MediaPlayer.create(me, R.raw.zeeroverslied)
-                        mediaPlayer.start()
-                        mediaPlayer.isLooping = true
+                        startSong(zeeroverslied)
                     }
                     "storm op zee" -> {
-                        mediaPlayer = MediaPlayer.create(me, R.raw.stormopzee)
-                        mediaPlayer.start()
-                        mediaPlayer.isLooping = true
+                        startSong(stormopzee)
                     }
                     "country roads" -> {
-                        mediaPlayer = MediaPlayer.create(me, R.raw.countryroads)
-                        mediaPlayer.start()
-                        mediaPlayer.isLooping = true
+                        startSong(countryroads)
                     }
                     "kutschacht" -> {
                         val adapter = DijkelLijstAdapter(applicationContext, schachtenLijst, dijkelLijst)
                         listSchachten.adapter = adapter
                     }
                     else -> {
-                        if(mediaPlayer.isPlaying ()){
-                            mediaPlayer.pause ()
-                            mediaPlayer.seekTo(0)
-                            mediaPlayer.isLooping = false
+                        if(gravensteen.isPlaying ()){
+                            stopSong(gravensteen)
                         }
-
+                        if(blauwvoet.isPlaying ()){
+                            stopSong(blauwvoet)
+                        }
+                        if(zeeroverslied.isPlaying ()){
+                            stopSong(zeeroverslied)
+                        }
+                        if(stormopzee.isPlaying ()){
+                            stopSong(stormopzee)
+                        }
+                        if(countryroads.isPlaying ()){
+                            stopSong(countryroads)
+                        }
                     }
                 }
 
@@ -218,9 +227,24 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    fun stopSong(mediaPlayer: MediaPlayer){
+        mediaPlayer.pause ()
+        mediaPlayer.seekTo(0)
+        mediaPlayer.isLooping = false
+    }
+
+    fun startSong(mediaPlayer: MediaPlayer){
+        mediaPlayer.start()
+        mediaPlayer.isLooping = true
+    }
+
     override fun onDestroy () {
         super.onDestroy ()
-        mediaPlayer.release ()
+        gravensteen.release ()
+        blauwvoet.release ()
+        zeeroverslied.release ()
+        stormopzee.release ()
+        countryroads.release ()
     }
 
     fun reset(){
