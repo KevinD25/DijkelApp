@@ -1,31 +1,22 @@
 package com.davis.kevin.dijkelapp
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
+import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.TextView
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
-import com.afollestad.materialdialogs.customview.getCustomView
 import com.davis.kevin.dijkelapp.Adapters.DijkelLijstAdapter
-import com.davis.kevin.dijkelapp.Adapters.DijkeltjesAdapter
-import com.davis.kevin.dijkelapp.Adapters.SchachtenLijstAdapter
 import com.davis.kevin.dijkelapp.DOM.Dijkel
+import com.davis.kevin.dijkelapp.DOM.MyApplication.Companion.currentUser
 import com.davis.kevin.dijkelapp.DOM.Schacht
 import com.google.firebase.database.*
 import com.mancj.materialsearchbar.MaterialSearchBar
-import kotlinx.android.synthetic.main.activity_dijkel.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_schachten.*
-import android.text.Editable
-import com.davis.kevin.dijkelapp.DOM.MyApplication.Companion.currentUser
-import com.google.firebase.auth.FirebaseAuth
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private var dijkel: Dijkel? = null
     private var dijkelLijst: MutableList<Dijkel> = mutableListOf()
     private lateinit var dijkelref: DatabaseReference
+    private lateinit var mediaPlayer : MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance()
         reference = FirebaseDatabase.getInstance().getReference("schachten")
         dijkelref = FirebaseDatabase.getInstance().getReference("dijkels")
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.gravensteen)
 
         fireBaseGet()
         val adapter = DijkelLijstAdapter(applicationContext, schachtenLijst, dijkelLijst)
@@ -58,21 +52,6 @@ class MainActivity : AppCompatActivity() {
         searchbar()
         reset()
 
-        val user = FirebaseAuth.getInstance().currentUser
-        user?.let {
-            // Name, email address, and profile photo Url
-            val name = user.displayName
-            val email = user.email
-            val photoUrl = user.photoUrl
-
-            // Check if user's email is verified
-            val emailVerified = user.isEmailVerified
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getToken() instead.
-            val uid = user.uid
-        }
     }
 
     override fun onBackPressed() {
@@ -164,6 +143,19 @@ class MainActivity : AppCompatActivity() {
                 schachtenLijst.filterTo(filteredSchachtenLijst, {it.getName().contains(charSequence)})
                 val adapter = DijkelLijstAdapter(applicationContext, filteredSchachtenLijst, dijkelLijst)
                 listSchachten.adapter = adapter
+
+                if(charSequence.toString().equals("gravensteen")){
+                    mediaPlayer.start()
+                    mediaPlayer.isLooping = true
+                }
+                else{
+                    if (mediaPlayer.isPlaying ()) {
+                        mediaPlayer.pause ()
+                        mediaPlayer.seekTo(0)
+                        mediaPlayer.isLooping = false
+                    }
+
+                }
             }
 
             override fun afterTextChanged(editable: Editable) {
@@ -171,6 +163,11 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    override fun onDestroy () {
+        super.onDestroy ()
+        mediaPlayer.release ()
     }
 
     fun reset(){

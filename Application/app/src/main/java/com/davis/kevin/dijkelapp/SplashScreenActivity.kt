@@ -1,9 +1,13 @@
 package com.davis.kevin.dijkelapp
 
 import android.content.Intent
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.transition.Explode
+import android.transition.Fade
+import android.view.Window
 
 class SplashScreenActivity : AppCompatActivity() {
     private var mDelayHandler: Handler? = null
@@ -22,11 +26,13 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
+
         //Initialize the Handler
         mDelayHandler = Handler()
 
         //Navigate with delay
         mDelayHandler!!.postDelayed(mRunnable, SPLASH_DELAY)
+
 
     }
 
@@ -38,5 +44,4 @@ class SplashScreenActivity : AppCompatActivity() {
 
         super.onDestroy()
     }
-
 }

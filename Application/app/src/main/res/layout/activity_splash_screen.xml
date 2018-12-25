@@ -10,7 +10,7 @@
 
     <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" app:srcCompat="@drawable/technicaschild" android:id="@+id/imageView6"
+            android:layout_height="match_parent" app:srcCompat="@drawable/technicaschild" android:id="@+id/imgSchild"
             android:scaleType="fitCenter"
             android:padding="80dp"
             android:alpha="1"
