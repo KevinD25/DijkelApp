@@ -3,7 +3,6 @@ package com.davis.kevin.dijkelapp
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
@@ -29,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private var dijkel: Dijkel? = null
     private var dijkelLijst: MutableList<Dijkel> = mutableListOf()
     private lateinit var dijkelref: DatabaseReference
+
     private lateinit var mediaPlayer : MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,16 +42,25 @@ class MainActivity : AppCompatActivity() {
         mediaPlayer = MediaPlayer.create(this, R.raw.gravensteen)
 
         fireBaseGet()
+
+        initialize()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initialize()
+    }
+
+    private fun initialize(){
         val adapter = DijkelLijstAdapter(applicationContext, schachtenLijst, dijkelLijst)
         listSchachten.adapter = adapter
         listSchachten.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             // This is your listview's selected item
-             item = parent.getItemAtPosition(position) as Schacht
+            item = parent.getItemAtPosition(position) as Schacht
             openDijkelDetail()
         }
         searchbar()
         reset()
-
     }
 
     override fun onBackPressed() {
@@ -62,9 +71,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
-        fireBaseGet()
-        reset()
         super.onResume()
+        initialize()
     }
 
     fun fireBaseGet() {
@@ -133,7 +141,7 @@ class MainActivity : AppCompatActivity() {
 
     fun searchbar(){
         val searchbar = findViewById(R.id.searchBar) as MaterialSearchBar
-
+        val me = this
         //Searchbar text change listener
         searchbar.addTextChangeListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
@@ -146,7 +154,50 @@ class MainActivity : AppCompatActivity() {
                 val adapter = DijkelLijstAdapter(applicationContext, filteredSchachtenLijst, dijkelLijst)
                 listSchachten.adapter = adapter
 
-                if(charSequence.toString().equals("gravensteen")){
+                var song : String = charSequence.toString()
+
+                when(song){
+                    "gravensteen" -> {
+                        mediaPlayer = MediaPlayer.create(me, R.raw.gravensteen)
+                        mediaPlayer.start()
+                        mediaPlayer.isLooping = true
+                    }
+                    "blauwvoet" -> {
+                        mediaPlayer = MediaPlayer.create(me, R.raw.blauwvoet)
+                        mediaPlayer.start()
+                        mediaPlayer.isLooping = true
+                    }
+                    "zeeroverslied" -> {
+                        mediaPlayer = MediaPlayer.create(me, R.raw.zeeroverslied)
+                        mediaPlayer.start()
+                        mediaPlayer.isLooping = true
+                    }
+                    "storm op zee" -> {
+                        mediaPlayer = MediaPlayer.create(me, R.raw.stormopzee)
+                        mediaPlayer.start()
+                        mediaPlayer.isLooping = true
+                    }
+                    "country roads" -> {
+                        mediaPlayer = MediaPlayer.create(me, R.raw.countryroads)
+                        mediaPlayer.start()
+                        mediaPlayer.isLooping = true
+                    }
+                    "kutschacht" -> {
+                        val adapter = DijkelLijstAdapter(applicationContext, schachtenLijst, dijkelLijst)
+                        listSchachten.adapter = adapter
+                    }
+                    else -> {
+                        if(mediaPlayer.isPlaying ()){
+                            mediaPlayer.pause ()
+                            mediaPlayer.seekTo(0)
+                            mediaPlayer.isLooping = false
+                        }
+
+                    }
+                }
+
+               /* if(charSequence.toString().equals("gravensteen")){
+                    mediaPlayer = MediaPlayer.create(me, R.raw.gravensteen)
                     mediaPlayer.start()
                     mediaPlayer.isLooping = true
                 }
@@ -157,7 +208,7 @@ class MainActivity : AppCompatActivity() {
                         mediaPlayer.isLooping = false
                     }
 
-                }
+                }*/
             }
 
             override fun afterTextChanged(editable: Editable) {

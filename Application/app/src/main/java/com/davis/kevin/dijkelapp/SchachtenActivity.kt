@@ -13,6 +13,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.davis.kevin.dijkelapp.Adapters.SchachtenLijstAdapter
+import com.davis.kevin.dijkelapp.DOM.Dijkel
 import com.davis.kevin.dijkelapp.DOM.Schacht
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,13 +26,17 @@ class SchachtenActivity : AppCompatActivity() {
     private lateinit var reference: DatabaseReference
     private var schacht: Schacht? = null
     private var schachtenLijst: MutableList<Schacht> = mutableListOf()
-    lateinit var item : Schacht
+    lateinit var item: Schacht
+    private lateinit var dijkelref: DatabaseReference
+    private var dijkel: Dijkel? = null
+    private var dijkelLijst: MutableList<Dijkel> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_schachten)
         database = FirebaseDatabase.getInstance()
         reference = FirebaseDatabase.getInstance().getReference("schachten")
+        dijkelref = FirebaseDatabase.getInstance().getReference("dijkels")
 
         fireBaseGet()
 
@@ -67,6 +72,28 @@ class SchachtenActivity : AppCompatActivity() {
             }
         }
         reference.addValueEventListener(schachtListener)
+
+        val dijkelListener = object : ValueEventListener {
+            override fun onDataChange(dijkelSnapshot: DataSnapshot) {
+
+                // Get Post object and use the values to update the UI
+                if (dijkelSnapshot.exists()) {
+                    dijkelLijst.clear()
+
+                    for (h in dijkelSnapshot.children) {
+                        dijkel = h.getValue(Dijkel::class.java)
+                        dijkelLijst.add(dijkel!!)
+                    }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
+                // ...
+            }
+        }
+        dijkelref.addValueEventListener(dijkelListener)
     }
 
     fun openDialog(view: View) {
@@ -110,7 +137,7 @@ class SchachtenActivity : AppCompatActivity() {
         }
     }
 
-    fun openEditActivity(){
+    fun openEditActivity() {
         val intent = Intent(this, SchachtDetailActivity::class.java)
         intent.putExtra("id", item.id)
         startActivity(intent)
@@ -118,9 +145,25 @@ class SchachtenActivity : AppCompatActivity() {
     }
 
     fun onClickDeleteAll() {
-        for(item in schachtenLijst){
-            reference.child(item.id).setValue(null)
+        var schachtlijst : MutableList<String> = mutableListOf()
+        var dijkellijst : MutableList<String> = mutableListOf()
+        for (item in schachtenLijst) {
+            schachtlijst.add(item.id)
+
         }
+        for(item in schachtlijst){
+            reference.child(item).setValue(null)
+        }
+        for (dijkel in dijkelLijst) {
+            dijkellijst.add(dijkel.id)
+
+        }
+        for(dijkel in dijkellijst){
+            dijkelref.child(dijkel).setValue(null)
+        }
+
+        finish();
+        startActivity(getIntent());
     }
 
     fun onClickConfirm(voornaamInput: EditText, achternaamInput: EditText) {

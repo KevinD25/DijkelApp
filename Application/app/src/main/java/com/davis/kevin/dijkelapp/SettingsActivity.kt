@@ -86,7 +86,9 @@ class SettingsActivity : AppCompatActivity() {
     }
     
     override fun onBackPressed() {
-        super.onBackPressed()
+        val intent = Intent(this, MainActivity::class.java)
+        finish()
+        startActivity(intent)
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 

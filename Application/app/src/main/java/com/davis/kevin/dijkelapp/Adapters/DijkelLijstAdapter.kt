@@ -33,9 +33,9 @@ private val dataSource: MutableList<Schacht>, private val dijkelLijst: MutableLi
                 if(!item.done){
                     aantalDijkels++
                 }
-
             }
         }
+
 
         Dijkeltextview.text = aantalDijkels.toString()
 

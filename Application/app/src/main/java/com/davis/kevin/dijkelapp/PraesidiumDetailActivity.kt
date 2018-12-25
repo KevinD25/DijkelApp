@@ -1,5 +1,6 @@
 package com.davis.kevin.dijkelapp
 
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -31,6 +32,26 @@ class PraesidiumDetailActivity : AppCompatActivity() {
         id = intent.getStringExtra("id")
         fireBaseGet()
         checkRol()
+
+    }
+
+    private fun checkLoggedInUser() {
+        if(currentUser.username != item.username){
+            btnDelete2.isEnabled = true
+            btnDelete2.setTextColor(Color.WHITE)
+        }
+        else{
+            btnDelete2.isEnabled = false
+            btnDelete2.setTextColor(Color.GRAY)
+        }
+        if(currentUser.username == "God"){
+            btnEdit2.isEnabled = false
+            btnEdit2.setTextColor(Color.GRAY)
+        }
+        else{
+            btnEdit2.isEnabled = true
+            btnEdit2.setTextColor(Color.WHITE)
+        }
     }
 
     private fun checkRol() {
@@ -130,6 +151,7 @@ class PraesidiumDetailActivity : AppCompatActivity() {
                         userLijst.add(user!!)
                     }
                     getClickedUser()
+                    checkLoggedInUser()
                 }
             }
 

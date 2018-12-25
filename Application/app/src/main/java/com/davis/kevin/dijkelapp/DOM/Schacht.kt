@@ -5,5 +5,4 @@ class Schacht(val id: String = "", val voornaam: String ="", val achternaam:Stri
     fun getName(): String {
         return voornaam.toLowerCase() + " " + achternaam.toLowerCase()
     }
-
 }
