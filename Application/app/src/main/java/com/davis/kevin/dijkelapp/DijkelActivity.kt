@@ -44,8 +44,8 @@ class DijkelActivity : AppCompatActivity() {
 
         id = intent.getStringExtra("id")
         fireBaseGet()
-        val adapter = DijkeltjesAdapter(applicationContext, dijkelLijst)
-        listDijkels.adapter = adapter
+
+        setAdapter()
 
     }
 
@@ -104,8 +104,7 @@ class DijkelActivity : AppCompatActivity() {
                     }
 
 
-                    val adapter = DijkeltjesAdapter(applicationContext, dijkelLijst)
-                    listDijkels.adapter = adapter
+                    setAdapter()
 
 
                 }
@@ -120,6 +119,14 @@ class DijkelActivity : AppCompatActivity() {
         dijkelref.addValueEventListener(dijkelListener)
 
 
+    }
+
+    private fun setAdapter(){
+        dijkelLijst.sortByDescending { it.datum }
+        dijkelLijst.sortBy { it.done }
+        val sortedDijkelLijst : List<Dijkel> = dijkelLijst.sortedWith(compareBy({it.done}))
+        val adapter = DijkeltjesAdapter(applicationContext, dijkelLijst)
+        listDijkels.adapter = adapter
     }
 
     fun addDijkel(view: View) {

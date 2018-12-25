@@ -67,9 +67,6 @@ class DijkeltjesAdapter(
                 // DatumCheckedTextview.visibility = View.INVISIBLE
             }
         }
-
-
-
         return rowView
     }
 
