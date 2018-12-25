@@ -62,6 +62,11 @@ class SchachtDetailActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
     fun onClickDelete(view:View){
         reference.child(item.id).setValue(null)
         for(dijkel in dijkelLijst) {

@@ -49,8 +49,6 @@ class DijkelActivity : AppCompatActivity() {
 
     }
 
-
-
     fun getClickedSchacht() {
         for (schacht in schachtenLijst) {
             if (schacht.id == id) {
@@ -121,10 +119,10 @@ class DijkelActivity : AppCompatActivity() {
 
     }
 
-    private fun setAdapter(){
+    private fun setAdapter() {
         dijkelLijst.sortByDescending { it.datum }
         dijkelLijst.sortBy { it.done }
-        val sortedDijkelLijst : List<Dijkel> = dijkelLijst.sortedWith(compareBy({it.done}))
+        val sortedDijkelLijst: List<Dijkel> = dijkelLijst.sortedWith(compareBy({ it.done }))
         val adapter = DijkeltjesAdapter(applicationContext, dijkelLijst)
         listDijkels.adapter = adapter
     }
@@ -150,7 +148,7 @@ class DijkelActivity : AppCompatActivity() {
         }
     }
 
-    fun onClickConfirm(aantalDijkels: EditText, redenDijkel: EditText, dialog:MaterialDialog) {
+    fun onClickConfirm(aantalDijkels: EditText, redenDijkel: EditText, dialog: MaterialDialog) {
 
         if (aantalDijkels.text.toString().trim() != "") {
             if (checkFields(aantalDijkels, redenDijkel)) {
@@ -158,7 +156,7 @@ class DijkelActivity : AppCompatActivity() {
                 val myRef = database.getReference("dijkels")
                 var aantal: Int = aantalDijkels.text.toString().trim().toInt()
                 var reden: String = redenDijkel.text.toString().trim()
-                val donor : String = currentUser.username
+                val donor: String = currentUser.username
                 for (i in 1..aantal) {
                     val dijkelId = myRef.push().key.toString()
                     val sdf = SimpleDateFormat("dd/M/yyyy")
@@ -170,8 +168,8 @@ class DijkelActivity : AppCompatActivity() {
                 dialog.dismiss()
 
             } else {
-                if(aantalDijkels.text.toString().trim() == "") aantalDijkels.setError("Empty field!")
-                if(redenDijkel.text.toString().trim() == "") redenDijkel.setError("Empty field!")
+                if (aantalDijkels.text.toString().trim() == "") aantalDijkels.setError("Empty field!")
+                if (redenDijkel.text.toString().trim() == "") redenDijkel.setError("Empty field!")
             }
         }
 
@@ -184,8 +182,13 @@ class DijkelActivity : AppCompatActivity() {
         return aantal > 0 && reden != ""
     }
 
-    fun onCheckedDone(){
+    fun onCheckedDone() {
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     /*fun onCheckedDone() {

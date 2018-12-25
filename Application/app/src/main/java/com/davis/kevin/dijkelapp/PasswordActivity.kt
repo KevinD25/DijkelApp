@@ -50,6 +50,7 @@ class PasswordActivity : AppCompatActivity() {
                 Toast.makeText(this, "Password changed...", Toast.LENGTH_SHORT).show()
                 reference.child(currentUser.id).setValue(user)
                 super.onBackPressed()
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             } else {
                 txtNewPassword.error = "Does not match..."
                 txtNewPassword2.error = "Does not match..."
@@ -83,5 +84,10 @@ class PasswordActivity : AppCompatActivity() {
             }
         }
         reference.addValueEventListener(schachtListener)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

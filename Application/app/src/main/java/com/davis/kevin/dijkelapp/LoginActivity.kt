@@ -113,5 +113,6 @@ class LoginActivity : AppCompatActivity() {
         currentUser = activeuser
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

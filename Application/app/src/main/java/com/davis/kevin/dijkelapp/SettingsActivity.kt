@@ -51,16 +51,19 @@ class SettingsActivity : AppCompatActivity() {
     fun goToSchachten(view: View) {
         val intent = Intent(this, SchachtenActivity::class.java)
         startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     fun goToUsers(view: View) {
         val intent = Intent(this, PraesidiumActivity::class.java)
         startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     fun goToPasswordChange(view:View){
         val intent = Intent(this, PasswordActivity::class.java)
         startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     fun Logout(view:View){
@@ -68,6 +71,7 @@ class SettingsActivity : AppCompatActivity() {
         val logoutUser : User = User("","", "", "")
         currentUser = logoutUser
         startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     private fun checkIfLoggedIn() {
@@ -76,8 +80,14 @@ class SettingsActivity : AppCompatActivity() {
         else{
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
 
+    }
+    
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
 }

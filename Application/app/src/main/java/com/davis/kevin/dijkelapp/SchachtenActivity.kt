@@ -114,6 +114,7 @@ class SchachtenActivity : AppCompatActivity() {
         val intent = Intent(this, SchachtDetailActivity::class.java)
         intent.putExtra("id", item.id)
         startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     fun onClickDeleteAll() {
@@ -144,6 +145,11 @@ class SchachtenActivity : AppCompatActivity() {
     fun checkFields(voornaam: String, achternaam: String): Boolean {
         //return !(voornaam.isNullOrEmpty() || achternaam.isNullOrEmpty() || voornaam.isNullOrBlank() || achternaam.isNullOrBlank())
         return voornaam != "" && achternaam != ""
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }
 

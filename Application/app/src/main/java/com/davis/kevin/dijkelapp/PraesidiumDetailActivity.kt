@@ -48,7 +48,7 @@ class PraesidiumDetailActivity : AppCompatActivity() {
         if (achternaam.isEmpty()) editAchternaam.error = "Empty field"
 
         if (voornaam.isNotEmpty() && achternaam.isNotEmpty()) {
-            val user = User(item.id, username, rol , item.password)
+            val user = User(item.id, username, rol, item.password)
             reference.child(item.id).setValue(user)
             super.onBackPressed()
         }
@@ -141,5 +141,10 @@ class PraesidiumDetailActivity : AppCompatActivity() {
         }
         reference.addValueEventListener(userListener)
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

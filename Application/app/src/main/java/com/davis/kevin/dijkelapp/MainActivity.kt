@@ -121,12 +121,14 @@ class MainActivity : AppCompatActivity() {
     fun goToSettings(view: View) {
         val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     fun openDijkelDetail(){
         val intent = Intent(this, DijkelActivity::class.java)
         intent.putExtra("id", item.id)
         startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     fun searchbar(){

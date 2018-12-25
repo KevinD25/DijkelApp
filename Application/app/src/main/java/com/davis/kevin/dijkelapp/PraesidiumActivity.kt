@@ -49,6 +49,7 @@ class PraesidiumActivity : AppCompatActivity() {
         val intent = Intent(this, PraesidiumDetailActivity::class.java)
         intent.putExtra("id", item.id)
         startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     fun fireBaseGet() {
@@ -229,5 +230,9 @@ class PraesidiumActivity : AppCompatActivity() {
         return voornaam != "" && achternaam != "" && ww != "" && ww2 != ""
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
 
 }
