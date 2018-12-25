@@ -24,7 +24,6 @@ class DijkeltjesAdapter(
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     private var dijkelref: DatabaseReference = FirebaseDatabase.getInstance().getReference("dijkels")
-    var timerGoing : ArrayList<Boolean> = arrayListOf()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val rowView = inflater.inflate(R.layout.dijkeldetailcustom, parent, false)
@@ -40,9 +39,6 @@ class DijkeltjesAdapter(
         RedenTextview.text = dataSource[position].reden
         DonorTextview.text = donor
 
-        for(status in dataSource){
-            timerGoing.add(false)
-        }
 
         if (dataSource[position].done) {
             image.visibility = View.VISIBLE
@@ -77,17 +73,20 @@ class DijkeltjesAdapter(
         return rowView
     }
 
+    override fun getItem(position: Int): Any {
+        return dataSource[position]
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getCount(): Int {
+        return dataSource.size
+    }
 
     private fun editDijkelState(position: Int, checkbox: CheckBox, image:ImageView) {
-        // create a daemon thread
-        val timer = Timer("schedule", true);
 
-
-
-// schedule a single event
-        if(!timerGoing[position]) {
-            timerGoing[position] = true
-            timer.schedule(3000) {
                 val dijkel = Dijkel(
                     dataSource[position].id,
                     dataSource[position].schachtid,
@@ -103,10 +102,8 @@ class DijkeltjesAdapter(
                 if (!checkbox.isChecked) {
                     image.visibility = View.INVISIBLE
                 }
-                timerGoing[position] = false
             }
-        }
-    }
+
 
     fun checkRoles(checkbox: CheckBox, position: Int) {
         when (currentUser.role) {
@@ -129,17 +126,5 @@ class DijkeltjesAdapter(
         }
 
         checkbox.isChecked = dataSource[position].done == true
-    }
-
-    override fun getItem(position: Int): Any {
-        return dataSource[position]
-    }
-
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
-
-    override fun getCount(): Int {
-        return dataSource.size
     }
 }
