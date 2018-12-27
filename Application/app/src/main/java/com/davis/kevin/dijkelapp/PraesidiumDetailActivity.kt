@@ -1,5 +1,6 @@
 package com.davis.kevin.dijkelapp
 
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -28,10 +29,11 @@ class PraesidiumDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_praesidium_detail)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         reference = FirebaseDatabase.getInstance().getReference("users")
         id = intent.getStringExtra("id")
         fireBaseGet()
-        checkRol()
+
 
     }
 
@@ -55,7 +57,10 @@ class PraesidiumDetailActivity : AppCompatActivity() {
     }
 
     private fun checkRol() {
-        spnRol.isEnabled = currentUser.role != "God"
+        spnRol.isEnabled = currentUser.role == "God" || currentUser.role == "god" || currentUser.role == "Praeses"
+        if(item.role == "God" || item.role == "god"){
+            spnRol.isEnabled = false
+        }
     }
 
     fun onClickEdit(view: View) {
@@ -137,6 +142,7 @@ class PraesidiumDetailActivity : AppCompatActivity() {
             }
         }
         fillInfo()
+        checkRol()
     }
 
     fun fireBaseGet() {

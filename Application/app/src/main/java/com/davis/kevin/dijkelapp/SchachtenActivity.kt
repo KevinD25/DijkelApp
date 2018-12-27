@@ -1,6 +1,7 @@
 package com.davis.kevin.dijkelapp
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -34,6 +35,7 @@ class SchachtenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_schachten)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         database = FirebaseDatabase.getInstance()
         reference = FirebaseDatabase.getInstance().getReference("schachten")
         dijkelref = FirebaseDatabase.getInstance().getReference("dijkels")
@@ -60,6 +62,7 @@ class SchachtenActivity : AppCompatActivity() {
                         schacht = h.getValue(Schacht::class.java)
                         schachtenLijst.add(schacht!!)
                     }
+                    schachtenLijst.sortBy { it.voornaam }
                     val adapter = SchachtenLijstAdapter(applicationContext, schachtenLijst)
                     listSchachtenAdmin.adapter = adapter
                 }

@@ -1,6 +1,7 @@
 package com.davis.kevin.dijkelapp
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.support.v7.app.AppCompatActivity
@@ -16,6 +17,7 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         checkActiveRole()
         checkIfLoggedIn()

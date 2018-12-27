@@ -1,8 +1,10 @@
 package com.davis.kevin.dijkelapp
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
@@ -36,10 +38,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var zeeroverslied : MediaPlayer
     private lateinit var stormopzee : MediaPlayer
     private lateinit var countryroads : MediaPlayer
+    private lateinit var vlaamseleeuw : MediaPlayer
+    private lateinit var kutschacht : MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         database = FirebaseDatabase.getInstance()
         reference = FirebaseDatabase.getInstance().getReference("schachten")
@@ -50,6 +55,8 @@ class MainActivity : AppCompatActivity() {
         zeeroverslied = MediaPlayer.create(this, R.raw.zeeroverslied)
         stormopzee = MediaPlayer.create(this, R.raw.stormopzee)
         countryroads = MediaPlayer.create(this, R.raw.countryroads)
+        vlaamseleeuw = MediaPlayer.create(this, R.raw.vlaamseleeuw)
+        kutschacht = MediaPlayer.create(this, R.raw.kutschacht)
 
         fireBaseGet()
 
@@ -62,6 +69,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initialize(){
+        schachtenLijst.sortBy { it.voornaam }
         val adapter = DijkelLijstAdapter(applicationContext, schachtenLijst, dijkelLijst)
         listSchachten.adapter = adapter
         listSchachten.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
@@ -98,6 +106,7 @@ class MainActivity : AppCompatActivity() {
                         schacht = h.getValue(Schacht::class.java)
                         schachtenLijst.add(schacht!!)
                     }
+                    schachtenLijst.sortBy { it.voornaam }
                     val adapter = DijkelLijstAdapter(applicationContext, schachtenLijst, dijkelLijst)
                     listSchachten.adapter = adapter
                 }
@@ -151,7 +160,6 @@ class MainActivity : AppCompatActivity() {
 
     fun searchbar(){
         val searchbar = findViewById(R.id.searchBar) as MaterialSearchBar
-        val me = this
         //Searchbar text change listener
         searchbar.addTextChangeListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
@@ -182,9 +190,14 @@ class MainActivity : AppCompatActivity() {
                     "country roads" -> {
                         startSong(countryroads)
                     }
+                    "vlaamse leeuw" -> {
+                        startSong(vlaamseleeuw)
+                    }
                     "kutschacht" -> {
                         val adapter = DijkelLijstAdapter(applicationContext, schachtenLijst, dijkelLijst)
                         listSchachten.adapter = adapter
+                        startSong(kutschacht)
+                        kutschacht.isLooping = false
                     }
                     else -> {
                         if(gravensteen.isPlaying ()){
@@ -201,6 +214,9 @@ class MainActivity : AppCompatActivity() {
                         }
                         if(countryroads.isPlaying ()){
                             stopSong(countryroads)
+                        }
+                        if(vlaamseleeuw.isPlaying()){
+                            stopSong(vlaamseleeuw)
                         }
                     }
                 }

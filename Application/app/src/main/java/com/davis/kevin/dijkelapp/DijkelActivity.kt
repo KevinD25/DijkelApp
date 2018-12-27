@@ -1,5 +1,7 @@
 package com.davis.kevin.dijkelapp
 
+import android.content.pm.ActivityInfo
+import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -35,12 +37,16 @@ class DijkelActivity : AppCompatActivity() {
     lateinit var customView: View
     lateinit var checkbox: CheckBox
 
+    private lateinit var kutschacht : MediaPlayer
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dijkel)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         database = FirebaseDatabase.getInstance()
         reference = FirebaseDatabase.getInstance().getReference("schachten")
         dijkelref = FirebaseDatabase.getInstance().getReference("dijkels")
+        kutschacht = MediaPlayer.create(this, R.raw.kutschacht)
 
         id = intent.getStringExtra("id")
         fireBaseGet()
@@ -122,7 +128,6 @@ class DijkelActivity : AppCompatActivity() {
     private fun setAdapter() {
         dijkelLijst.sortByDescending { it.datum }
         dijkelLijst.sortBy { it.done }
-        val sortedDijkelLijst: List<Dijkel> = dijkelLijst.sortedWith(compareBy({ it.done }))
         val adapter = DijkeltjesAdapter(applicationContext, dijkelLijst)
         listDijkels.adapter = adapter
     }
@@ -148,6 +153,8 @@ class DijkelActivity : AppCompatActivity() {
         }
     }
 
+
+
     fun onClickConfirm(aantalDijkels: EditText, redenDijkel: EditText, dialog: MaterialDialog) {
 
         if (aantalDijkels.text.toString().trim() != "") {
@@ -163,7 +170,11 @@ class DijkelActivity : AppCompatActivity() {
                     val currentDate = sdf.format(Date())
                     val dijkel =
                         Dijkel(dijkelId, item.id, reden, donor, false, currentDate)
-                    myRef.child(dijkelId).setValue(dijkel).addOnCompleteListener {}
+                    myRef.child(dijkelId).setValue(dijkel).addOnCompleteListener {
+                        kutschacht.start()
+                        kutschacht.isLooping = false
+                    }
+
                 }
                 dialog.dismiss()
 
